@@ -178,5 +178,128 @@ $mysqlDb->disconnect(); // Ngắt kết nối từ cơ sở dữ liệu MySQL.
 $postgreDb->connect(); // Kết nối tới cơ sở dữ liệu PostgreSQL.
 $postgreDb->query("SELECT * FROM customers"); // Thực hiện truy vấn PostgreSQL: SELECT * FROM customers
 $postgreDb->disconnect(); // Ngắt kết nối từ cơ sở dữ liệu PostgreSQL.
+//bai1
+interface Resizable {
+    public function resize();
+}
+class Rectangle1 implements Resizable {
+    protected $length, $width;
+    public function __construct($length, $width) {
+        $this->length = $length;
+        $this->width = $width;
+    }
+    public function resize() {
+        echo "resize length is: ". $this->length. "<br>";
+        echo " resize width is: ". $this->width. "<br>";
+    }
+}
+$less6_1 = new Rectangle1(3, 4);
+echo $less6_1->resize();
 
+//bai2 
+interface Logger {
+    public function logInfo();
+    public function logWarning();
+    public function logError();
+}
+class FileLogger implements Logger {
+    public function logInfo() {
+
+    }
+    public function logWarning() {
+        
+    }
+    public function logError() {
+        
+    }
+    protected $log;
+    public function __construct($log) {
+        $this->log = $log;
+        $this->logInfo();
+        $this->logWarning();
+        $this->logError();
+    }
+    public function getLog() {
+        return $this->log;
+    }
+}
+class DatabaseLogger implements Logger {
+    public function logInfo() {
+
+    }
+    public function logWarning() {
+        
+    }
+    public function logError() {
+        
+    }
+    protected $log;
+    public function __construct($log) {
+        $this->log = $log;
+        $this->logInfo();
+        $this->logWarning();
+        $this->logError();
+    }
+    public function getLog() {
+        return $this->log;
+    }
+}
+$less7_1 = new FileLogger("bug...1");
+$less7_2 = new DatabaseLogger("bug...2");
+echo $less7_1->getLog(). "<br>";
+echo $less7_2->getLog(). "<br>";
+
+//bai3
+interface Drawable {
+    public function draw();
+}
+class Circle1 implements Drawable {
+    public function draw() {
+        return "Drawing a circle:...";
+    }
+}
+class Square1 implements Drawable {
+    public function draw() {
+        return "Drawing a square:...";
+    }
+}
+$less8_1 = new Circle1();
+$less8_2 = new Square1();
+$draws = [$less8_1, $less8_2];
+foreach($draws as $draw)
+echo $draw->draw(). "<br>";
+
+//bai4
+interface Sortable {
+    public function getSort();
+}
+class ArraySorter implements Sortable {
+    protected $arr;
+    public function __construct($arr) {
+        $this->arr = $arr;
+    }
+    public function getSort() {
+        sort($this->arr);
+        return $this->arr;
+    }
+}
+class LinkedListSorter implements Sortable {
+    protected $arr;
+    public function __construct($arr) {
+        $this->arr = $arr;
+    }
+    public function getSort() {
+        sort($this->arr);
+        return $this->arr;
+    }
+}
+$arr1 = [5,6,4,1];
+$arr2 = ["Volvo", "BMW", "Toyota"];
+$less9_1 = new ArraySorter($arr1);
+$less9_2 = new LinkedListSorter($arr2);
+$result1 = $less9_1->getSort();
+$result2 = $less9_2->getSort();
+echo implode(", ", $result1). "<br>";
+echo implode(", ", $result2). "<br>";
+?>
 ?>
